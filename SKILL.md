@@ -23,6 +23,19 @@ Call the resolved directory `MEMORY_ROOT` in commands and notes. Never assume a 
 
 Use project-local memory for project-specific facts, unfinished work, local paths, and repository decisions. Use global or skill-local memory only for knowledge that is reusable across projects.
 
+## Encoding
+
+Memory files must be read and written as UTF-8. This matters for memories that contain non-ASCII text, such as names, Chinese text, or other localized content.
+
+When using PowerShell, always pass `-Encoding UTF8` to `Get-Content` when reading memory files. Do not rely on the shell's default encoding.
+
+PowerShell example:
+```powershell
+Get-Content -LiteralPath $MemoryFile -Raw -Encoding UTF8
+```
+
+When checking whether a memory has encoding damage, inspect the raw bytes before assuming the stored content is corrupt. UTF-8 bytes that render incorrectly usually indicate the file was decoded with the wrong encoding.
+
 ## Privacy and Scope
 
 Do not store secrets, passwords, API keys, access tokens, private credentials, or sensitive personal data.
@@ -120,12 +133,14 @@ rg "^tags:.*keyword" "$MEMORY_ROOT" -i
 # 5. Full-text search when summary search is not enough
 rg "keyword" "$MEMORY_ROOT" -i
 
-# 6. Read specific memory files that look relevant
+# 6. Read specific memory files that look relevant, using explicit UTF-8 decoding
 ```
 
 If the memory root is hidden, gitignored, or otherwise excluded by the search tool, add the tool-specific options needed to include it, such as `--hidden` or `--no-ignore` for ripgrep.
 
 On PowerShell, use `$env:AGENT_MEMORY_DIR` for the environment variable and pass the resolved memory path directly when a command does not support shell-style variables.
+
+On PowerShell, read selected files with `Get-Content -Raw -Encoding UTF8` so non-ASCII text is not misdecoded.
 
 ## Operations
 
