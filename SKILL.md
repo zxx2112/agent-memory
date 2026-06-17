@@ -1,6 +1,6 @@
 ---
 name: agent-memory
-description: Persistent memory for storing, searching, updating, and organizing durable agent or project knowledge across conversations. Use when saving reusable findings, project context, gotchas, decisions, solutions, resumable work, or when checking existing memory before related work.
+description: Persistent memory for storing, searching, updating, and organizing durable agent or project knowledge across conversations. Use when saving reusable findings, project context, gotchas, decisions, solutions, resumable work, or when checking existing memory before related work. Also use before asking the user to repeat personal facts, preferences, names, recurring project details, prior decisions, or other context they may have already shared.
 ---
 
 # Agent Memory
@@ -8,6 +8,17 @@ description: Persistent memory for storing, searching, updating, and organizing 
 Maintain a persistent memory space for knowledge that should survive beyond the current conversation.
 
 Use memory proactively when it would save future investigation, preserve project context, or make resumed work easier. Do not save everything; save information that is durable, actionable, and likely to matter again.
+
+## Mandatory Trigger
+
+Before asking the user to provide a fact, preference, name, prior decision, or project detail that may already be stored, search memory first.
+
+This is required for:
+- Requests that depend on the user's own context
+- Follow-up requests that refer to prior work, decisions, preferences, or known entities
+- Simple writing, planning, or implementation tasks where a remembered fact could avoid asking the user to repeat themselves
+
+If memory search finds the needed context, use it directly. If memory search does not find it, then ask the user.
 
 ## Memory Root
 
