@@ -53,10 +53,16 @@ Save memories when you discover something worth preserving:
 - Architectural decisions and their rationale
 - In-progress work that may be resumed later
 
-Check memories when starting related work:
-- Before investigating a familiar problem area
-- When working on a feature or repository touched before
-- When resuming work after a conversation break
+Check memories when a request may depend on durable context that the user has already shared. Prefer a quick memory search before asking the user to repeat information that could reasonably be stored.
+
+This includes:
+- Personal facts, preferences, names, recurring projects, prior decisions, or resumable work
+- Requests that refer to the user's own context, even if the request is framed as a simple writing, planning, or implementation task
+- Follow-up requests where memory could avoid re-asking for already known context
+
+Examples:
+- If the user asks for something based on their pet's name, search memory before asking for the name.
+- If the user asks to continue or adapt prior work, search memory for relevant project or decision context first.
 
 Organize memories when needed:
 - Consolidate scattered memories on the same topic
@@ -114,6 +120,8 @@ Use `YYYY-MM-DD` dates. Use `status` values from this set when applicable: `in-p
 ## Search Workflow
 
 Use a summary-first approach to find relevant memories efficiently.
+
+When searching for user-specific context, derive a few likely keywords from the request and search summaries, tags, and full text before asking the user to repeat the information.
 
 Prefer the host environment's fastest available search tool. If `rg` is available:
 
